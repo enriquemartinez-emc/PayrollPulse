@@ -2,7 +2,7 @@
 
 public static class EmployeesEndpoints
 {
-    public static IEndpointRouteBuilder MapEmployeeEndpoints(this IEndpointRouteBuilder app)
+    public static void MapEmployeeEndpoints(this IEndpointRouteBuilder app)
     {
         var group = app.MapGroup("/api/employees");
 
@@ -36,7 +36,5 @@ public static class EmployeesEndpoints
             .WithName("SearchForEmployee")
             .RequireAuthorization("role:admin")
             .WithSummary("Search for an employee");
-
-        return app;
     }
 }
