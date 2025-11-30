@@ -1,4 +1,8 @@
-﻿namespace Payroll;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+
+namespace Payroll;
 
 public static class ProgramExtensions
 {
@@ -7,6 +11,7 @@ public static class ProgramExtensions
         builder.AddSwagger();
         builder.AddDatabase();
         builder.AddCors();
+        builder.AddJwtAuthentication();
         builder.Services.AddProblemDetails();
     }
 
@@ -24,6 +29,41 @@ public static class ProgramExtensions
                 .UseNpgsql(builder.Configuration.GetConnectionString("Default"))
                 .UseSnakeCaseNamingConvention();
         });
+    }
+
+    private static void AddJwtAuthentication(this WebApplicationBuilder builder)
+    {
+        builder
+            .Services.AddAuthentication()
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    IssuerSigningKey = Jwt.SecurityKey(builder.Configuration["Jwt:Key"]!),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero,
+                    ValidateIssuerSigningKey = true,
+                    NameClaimType = ClaimTypes.Name,
+                    RoleClaimType = ClaimTypes.Role,
+                };
+
+                options.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = ctx => Task.CompletedTask,
+                };
+            });
+
+        builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
+        builder.Services.AddTransient<Jwt>();
+
+        builder
+            .Services.AddAuthorizationBuilder()
+            .AddPolicy("role:admin", p => p.RequireRole(Roles.Admin))
+            .AddPolicy("role:employee", p => p.RequireRole(Roles.Employee));
+
+        builder.Services.AddAuthorization();
     }
 
     private static void AddCors(this WebApplicationBuilder builder)
