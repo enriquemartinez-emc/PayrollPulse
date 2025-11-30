@@ -1,4 +1,10 @@
 using Payroll;
+using Payroll.Features.Auth;
+using Payroll.Features.Departments;
+using Payroll.Features.Employees;
+using Payroll.Features.Payroll;
+using Payroll.Features.Payslips;
+using Payroll.Features.Policies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,5 +26,17 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("AllowFrontend");
+app.UseExceptionHandler();
+
+app.MapEmployeeEndpoints();
+app.MapPayrollEndpoints();
+app.MapDepartmentEndpoints();
+app.MapAuthEndpoints();
+app.MapPayslipsEndpoints();
+app.MapPoliciesEndpoints();
+
+app.MapGet("/health", () => Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow }))
+    .WithName("HealthCheck");
 
 app.Run();
