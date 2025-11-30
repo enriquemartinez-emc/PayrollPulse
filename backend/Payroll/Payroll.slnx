@@ -1,1 +1,6 @@
-<Solution />
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Payroll/Payroll.csproj" />
+  </Folder>
+  <Folder Name="/tests/" />
+</Solution>
