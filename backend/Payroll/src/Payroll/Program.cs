@@ -39,4 +39,10 @@ app.MapPoliciesEndpoints();
 app.MapGet("/health", () => Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow }))
     .WithName("HealthCheck");
 
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<PayrollDbContext>();
+    await DbInitializer.InitializeAsync(db);
+}
+
 app.Run();
