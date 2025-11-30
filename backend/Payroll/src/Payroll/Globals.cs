@@ -1,4 +1,5 @@
-﻿global using Microsoft.EntityFrameworkCore;
+﻿global using FluentValidation;
+global using Microsoft.EntityFrameworkCore;
 global using Payroll.Domain;
 global using Payroll.Domain.ValueObjects;
 global using Payroll.Infrastructure.Auth;
