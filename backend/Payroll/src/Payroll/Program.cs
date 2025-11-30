@@ -1,11 +1,3 @@
-using Payroll;
-using Payroll.Features.Auth;
-using Payroll.Features.Departments;
-using Payroll.Features.Employees;
-using Payroll.Features.Payroll;
-using Payroll.Features.Payslips;
-using Payroll.Features.Policies;
-
 var builder = WebApplication.CreateBuilder(args);
 
 var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
