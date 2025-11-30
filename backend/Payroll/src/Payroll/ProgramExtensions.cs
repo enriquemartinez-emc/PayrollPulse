@@ -10,8 +10,10 @@ public static class ProgramExtensions
     {
         builder.AddSwagger();
         builder.AddDatabase();
+        builder.Services.AddValidatorsFromAssembly(typeof(ProgramExtensions).Assembly);
         builder.AddCors();
         builder.AddJwtAuthentication();
+        builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
         builder.Services.AddProblemDetails();
     }
 
