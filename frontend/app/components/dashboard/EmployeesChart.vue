@@ -1,5 +1,12 @@
 <script setup lang="ts">
-import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from "chart.js";
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+  type ChartOptions,
+} from "chart.js";
 import { Chart } from "vue-chartjs";
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement);
@@ -45,15 +52,13 @@ const chartData = computed(() => ({
   ],
 }));
 
-const chartOptions = {
+const chartOptions: ChartOptions = {
   responsive: true,
+  maintainAspectRatio: false,
   plugins: {
-    legend: {
-      position: "right",
-    },
-    title: {
-      display: false,
-    },
+    legend: { display: true, position: "right" },
+    title: { display: false },
+    tooltip: { enabled: true },
   },
 };
 </script>
