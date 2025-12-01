@@ -3,10 +3,6 @@ definePageMeta({
   layout: false,
 });
 
-useHead({
-  title: `Login - ${useAppConfig().title}`,
-});
-
 import * as z from "zod";
 import type { FormSubmitEvent, AuthFormField } from "@nuxt/ui";
 

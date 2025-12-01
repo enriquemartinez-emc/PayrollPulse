@@ -2,13 +2,12 @@ import type { User, UserToSubmit } from "~/types";
 
 export async function useUsers() {
   const users = useState<User[]>("users", () => []);
-  const { token } = useAuth();
   const toast = useToast();
 
   const { data, status, execute } = await useFetch<User[]>("/auth/users", {
     baseURL: useRuntimeConfig().public.apiUrl,
     headers: {
-      Authorization: `Bearer ${token.value}`,
+      Authorization: `Bearer ${useCookie("auth-token").value}`,
     },
     immediate: false,
   });
@@ -30,7 +29,7 @@ export async function useUsers() {
       },
       baseURL: useRuntimeConfig().public.apiUrl,
       headers: {
-        Authorization: `Bearer ${token.value}`,
+        Authorization: `Bearer ${useCookie("auth-token").value}`,
       },
     });
 

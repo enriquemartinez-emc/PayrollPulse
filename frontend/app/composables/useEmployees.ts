@@ -17,14 +17,13 @@ export function useEmployees() {
   }
 
   async function registerEmployee(body: RegisterEmployee) {
-    const { token } = useAuth();
     try {
       const newEmployee = await $fetch<Employee>("/employees", {
         method: "POST",
         body,
         baseURL: `${useRuntimeConfig().public.apiUrl}`,
         headers: {
-          Authorization: `Bearer ${token.value}`,
+          Authorization: `Bearer ${useCookie("auth-token").value}`,
         },
       });
       employees.value.unshift(newEmployee);

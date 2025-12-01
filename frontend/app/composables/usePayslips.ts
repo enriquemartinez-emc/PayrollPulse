@@ -7,8 +7,6 @@ export async function usePayslips() {
     () => []
   );
 
-  const { token } = useAuth();
-
   const { data, status, error, execute } = await useFetch<Payslip[]>(
     `/employees/${employeeId}/payslips`,
     {
@@ -17,7 +15,7 @@ export async function usePayslips() {
       immediate: false,
       baseURL: `${useRuntimeConfig().public.apiUrl}`,
       headers: {
-        Authorization: `Bearer ${token.value}`,
+        Authorization: `Bearer ${useCookie("auth-token").value}`,
       },
     }
   );

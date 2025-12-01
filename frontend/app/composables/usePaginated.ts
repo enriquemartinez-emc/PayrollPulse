@@ -1,7 +1,6 @@
 import type { PaginatedList } from "~/types";
 
 export function usePaginated<T>(url: string, pageSize = 10) {
-  const { token } = useAuth();
   const page = ref(1);
 
   const { data, status, error, refresh, execute } = useFetch<PaginatedList<T>>(
@@ -18,7 +17,7 @@ export function usePaginated<T>(url: string, pageSize = 10) {
       }),
       baseURL: `${useRuntimeConfig().public.apiUrl}`,
       headers: {
-        Authorization: `Bearer ${token.value}`,
+        Authorization: `Bearer ${useCookie("auth-token").value}`,
       },
       query: { page: page.value, pageSize },
       watch: [page],

@@ -39,7 +39,7 @@ const formattedTotals = computed(() => ({
 
 <template>
   <div class="py-5 flex justify-end">
-    <ExplanationSlideOver :payslip-id="id" />
+    <ExplainSlideOver :payslip-id="id" />
   </div>
   <div class="py-2">
     <UCard class="p-4">

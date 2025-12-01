@@ -3,8 +3,7 @@ import type { Payroll } from "~/types";
 export function usePayroll() {
   const payrolls = useState<Payroll[]>("payrolls", () => []);
 
-  const { data, execute, status, page } =
-    usePaginatedFetch<Payroll>("/payroll");
+  const { data, execute, status, page } = usePaginated<Payroll>("/payroll");
 
   async function fetchPayrolls(refresh = false) {
     if (status.value !== "idle" && !refresh) return;
@@ -13,14 +12,13 @@ export function usePayroll() {
   }
 
   async function processPayroll(startDate: string, endDate: string) {
-    const { token } = useAuth();
     try {
       const newPayroll = await $fetch<Payroll>("/payroll/process", {
         method: "POST",
         body: { startDate, endDate },
         baseURL: `${useRuntimeConfig().public.apiUrl}`,
         headers: {
-          Authorization: `Bearer ${token.value}`,
+          Authorization: `Bearer ${useCookie("auth-token").value}`,
         },
       });
       payrolls.value.unshift(newPayroll);

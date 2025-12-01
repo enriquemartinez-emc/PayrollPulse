@@ -6,10 +6,10 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
       <div class="lg:col-span-2">
-        <!-- <PayrollChart /> -->
+        <DashboardPayrollChart />
       </div>
       <div class="lg:col-span-1">
-        <EmployeeChart />
+        <DashboardEmployeesChart />
       </div>
     </div>
   </div>

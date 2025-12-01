@@ -1,7 +1,6 @@
 import { debounce } from "~/utils";
 
 export function useEmployeeSearch() {
-  const { token } = useAuth();
   const query = ref("");
   const debouncedQuery = ref("");
 
@@ -21,7 +20,7 @@ export function useEmployeeSearch() {
     query: { query: debouncedQuery },
     baseURL: `${useRuntimeConfig().public.apiUrl}`,
     headers: {
-      Authorization: `Bearer ${token.value}`,
+      Authorization: `Bearer ${useCookie("auth-token").value}`,
     },
     immediate: false,
   });

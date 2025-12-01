@@ -1,8 +1,6 @@
 import type { Department } from "~/types";
 
 export async function useDepartments() {
-  const { token } = useAuth();
-
   const { data, status, error, refresh } = await useFetch<Department[]>(
     "/departments",
     {
@@ -10,7 +8,7 @@ export async function useDepartments() {
       server: true,
       baseURL: `${useRuntimeConfig().public.apiUrl}`,
       headers: {
-        Authorization: `Bearer ${token.value}`,
+        Authorization: `Bearer ${useCookie("auth-token").value}`,
       },
     }
   );

@@ -1,14 +1,12 @@
 import type { Policy } from "~/types";
 
 export async function usePolicies() {
-  const { token } = useAuth();
-
   const { data, status, execute } = await useFetch<Policy[]>("/policies", {
     lazy: true,
     server: true,
     baseURL: `${useRuntimeConfig().public.apiUrl}`,
     headers: {
-      Authorization: `Bearer ${token.value}`,
+      Authorization: `Bearer ${useCookie("auth-token").value}`,
     },
   });
 
