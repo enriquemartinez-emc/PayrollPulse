@@ -28,8 +28,10 @@ app.MapAuthEndpoints();
 app.MapPayslipsEndpoints();
 app.MapPoliciesEndpoints();
 
-app.MapGet("/health", () => Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow }))
+app.MapGet("/api/health", () => Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow }))
     .WithName("HealthCheck");
+
+app.MapHealthChecks("/api/health");
 
 using (var scope = app.Services.CreateScope())
 {

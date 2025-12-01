@@ -17,6 +17,7 @@ public static class ProgramExtensions
         builder.AddAi();
         builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
         builder.Services.AddProblemDetails();
+        builder.Services.AddHealthChecks();
     }
 
     private static void AddSwagger(this WebApplicationBuilder builder)

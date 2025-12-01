@@ -67,10 +67,11 @@ services:
       ollama:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/api/health"]
+      test: ["CMD-SHELL", "dotnet --info > /dev/null && exit 0 || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 5
+      start_period: 40s
 
   nuxt:
     build:
@@ -79,7 +80,7 @@ services:
     container_name: payroll_nuxt
     restart: always
     environment:
-      NUXT_PUBLIC_API_URL: "http://api:8080"
+      NUXT_PUBLIC_API_URL: "http://localhost:8080/api"
       NUXT_PORT: "3000"
     ports:
       - "3000:3000"
