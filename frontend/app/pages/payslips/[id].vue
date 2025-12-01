@@ -38,9 +38,10 @@ const formattedTotals = computed(() => ({
 </script>
 
 <template>
-  <div class="py-10 space-y-6">
-    <PayslipExplanationSlideOver :payslip-id="id" />
-
+  <div class="py-5 flex justify-end">
+    <ExplanationSlideOver :payslip-id="id" />
+  </div>
+  <div class="py-2">
     <UCard class="p-4">
       <div class="flex items-center justify-between gap-4">
         <div>

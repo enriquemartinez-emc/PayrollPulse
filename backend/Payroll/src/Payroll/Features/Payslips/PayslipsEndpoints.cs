@@ -12,5 +12,12 @@ public static class PayslipsEndpoints
             .RequireAuthorization()
             .ProducesValidationProblem()
             .WithSummary("Display the details of a payslip");
+
+        group
+            .MapPost("/explain", Explain.Handle)
+            .WithName("PayslipExplanation")
+            .RequireAuthorization()
+            .ProducesValidationProblem()
+            .WithSummary("Display the explanation of a payslip");
     }
 }

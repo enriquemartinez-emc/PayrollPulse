@@ -47,8 +47,8 @@ services:
 
   api:
     build:
-      context: ./backend
-      dockerfile: ./src/PayrollAi/Dockerfile
+      context: ./backend/Payroll
+      dockerfile: ./src/Payroll/Dockerfile
     container_name: payroll_api
     restart: always
     environment:

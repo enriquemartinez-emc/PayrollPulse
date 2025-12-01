@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.SemanticKernel;
 
 namespace Payroll;
 
@@ -13,6 +14,7 @@ public static class ProgramExtensions
         builder.Services.AddValidatorsFromAssembly(typeof(ProgramExtensions).Assembly);
         builder.AddCors();
         builder.AddJwtAuthentication();
+        builder.AddAi();
         builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
         builder.Services.AddProblemDetails();
     }
@@ -99,6 +101,43 @@ public static class ProgramExtensions
                     }
                 }
             );
+        });
+    }
+
+    private static void AddAi(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddSingleton<Kernel>(sp =>
+        {
+            var config = sp.GetRequiredService<IConfiguration>();
+
+            var builder = Kernel.CreateBuilder();
+
+            // Local Ollama (dev mode)
+            builder.AddOllamaChatCompletion(
+                modelId: config["AI:Model"] ?? "phi3:mini",
+                endpoint: new Uri(config["AI:Endpoint"] ?? "http://ollama:11434")
+            );
+
+            // OpenAI (optional)
+            if (config.GetValue<bool>("AI:EnableOpenAI"))
+            {
+                builder.AddOpenAIChatCompletion(
+                    modelId: config["AI:OpenAI:Model"] ?? "",
+                    apiKey: config["AI:OpenAI:ApiKey"] ?? ""
+                );
+            }
+
+            // Azure OpenAI (optional)
+            if (config.GetValue<bool>("AI:EnableAzure"))
+            {
+                builder.AddAzureOpenAIChatCompletion(
+                    deploymentName: config["AI:Azure:Deployment"] ?? "",
+                    endpoint: config["AI:Azure:Endpoint"] ?? "",
+                    apiKey: config["AI:Azure:ApiKey"] ?? ""
+                );
+            }
+
+            return builder.Build();
         });
     }
 }
