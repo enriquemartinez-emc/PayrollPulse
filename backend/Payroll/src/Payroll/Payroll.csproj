@@ -1,11 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="EFCore.NamingConventions" Version="9.0.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.0" />
@@ -20,17 +18,18 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.0.1" />
   </ItemGroup>
-
   <ItemGroup>
     <EditorConfigFiles Remove="C:\dev\projects\payroll\backend\Payroll\src\Payroll\.editorconfig" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="C:\dev\projects\payroll\backend\Payroll\src\Payroll\.editorconfig" />
   </ItemGroup>
-
   <ItemGroup>
     <Folder Include="Infrastructure\AI\Prompts\" />
   </ItemGroup>
-
+  <ItemGroup>
+    <Content Include="Infrastructure/AI/Prompts\**\*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

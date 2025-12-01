@@ -21,7 +21,6 @@ public static class Explain
         }
     }
 
-    private const string PromptPath = "Infrastructure/AI/Prompts/PayslipExplanation.txt";
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
@@ -33,6 +32,8 @@ public static class Explain
         PayrollDbContext db,
         Kernel kernel,
         IValidator<ExplainRequest> validator,
+        IConfiguration config,
+        IWebHostEnvironment env,
         CancellationToken ct
     )
     {
@@ -60,7 +61,9 @@ public static class Explain
                 return TypedResults.Forbid();
         }
 
-        var template = await File.ReadAllTextAsync(PromptPath, ct);
+        var relativePath = config["AI:PromptPath"] ?? "";
+        var fullPath = Path.Combine(env.ContentRootPath, relativePath);
+        var template = await File.ReadAllTextAsync(fullPath, ct);
 
         var aiContext = new PayslipForAI
         {

@@ -32,7 +32,6 @@ export function useExplain() {
         break;
       }
 
-      console.log("Received:", value);
       status.value = "streaming";
 
       if (value.startsWith("data: ")) {
