@@ -2,7 +2,6 @@ import type { User, UserToSubmit } from "~/types";
 
 export async function useUsers() {
   const users = useState<User[]>("users", () => []);
-  const toast = useToast();
 
   const { data, status, execute } = await useFetch<User[]>("/auth/users", {
     baseURL: useRuntimeConfig().public.apiUrl,
@@ -35,12 +34,6 @@ export async function useUsers() {
 
     if (newUser) {
       users.value.unshift(newUser);
-      toast.add({
-        title: "Success",
-        description: "User created successfully.",
-        icon: "i-lucide-thumbs-up",
-      });
-
       return newUser;
     }
   }
