@@ -1,10 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
 using Microsoft.SemanticKernel;
 using Payroll.Infrastructure.AI;
-using static Payroll.Features.Employees.Register;
 
 namespace Payroll.Features.Payslips;
 
