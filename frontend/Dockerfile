@@ -1,16 +1,30 @@
-FROM node:20-slim
+# Stage 1: Build
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-# Install dependencies
+# Copy package.json from frontend
 COPY package*.json ./
-RUN npm install
+RUN npm ci
 
-# Copy source
+# Copy all frontend sources (including nuxt.config and app/)
 COPY . .
 
-# Expose Nuxt default port
-EXPOSE 3000
+# Build Nuxt for production
+RUN npm run build
 
-# Run in dev mode (hot reload)
-CMD ["npm", "run", "dev"]
+# Stage 2: Runtime
+FROM node:20-alpine AS runner
+
+WORKDIR /app
+ENV NODE_ENV=production
+
+# Copy built output and package.json
+COPY --from=builder /app/.output ./.output
+COPY --from=builder /app/package*.json ./
+
+# Install only production dependencies
+RUN npm ci --omit=dev
+
+EXPOSE 3000
+CMD ["node", ".output/server/index.mjs"]

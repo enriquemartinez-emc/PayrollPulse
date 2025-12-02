@@ -45,6 +45,16 @@ services:
       retries: 3
       start_period: 300s
 
+  ollama-init:
+    image: curlimages/curl:latest
+    depends_on:
+      ollama:
+        condition: service_healthy
+    command: >
+      curl -X POST http://ollama:11434/api/generate
+      -d '{"model":"phi3:mini","prompt":"why the sky is blue? Be concise."}'
+    restart: "no"
+
   api:
     build:
       context: ./backend/Payroll
@@ -66,6 +76,8 @@ services:
         condition: service_started
       ollama:
         condition: service_healthy
+      ollama-init:
+        condition: service_completed_successfully
     healthcheck:
       test: ["CMD-SHELL", "dotnet --info > /dev/null && exit 0 || exit 1"]
       interval: 10s
@@ -77,19 +89,18 @@ services:
     build:
       context: ./frontend
       dockerfile: ./Dockerfile
+      target: runner
     container_name: payroll_nuxt
     restart: always
     environment:
       NUXT_PUBLIC_API_URL: "http://localhost:8080/api"
       NUXT_PORT: "3000"
+      NODE_ENV: "production"
     ports:
       - "3000:3000"
     depends_on:
       api:
         condition: service_healthy
-    command: ["npm", "run", "dev"]
-    volumes:
-      - ./frontend:/usr/src/app
 
 volumes:
   pgdata:
