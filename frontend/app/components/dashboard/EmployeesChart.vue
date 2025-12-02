@@ -5,11 +5,12 @@ import {
   Tooltip,
   Legend,
   ArcElement,
+  DoughnutController,
   type ChartOptions,
 } from "chart.js";
 import { Chart } from "vue-chartjs";
 
-ChartJS.register(Title, Tooltip, Legend, ArcElement);
+ChartJS.register(Title, Tooltip, Legend, ArcElement, DoughnutController);
 
 const { employees, fetchEmployees } = useEmployees();
 

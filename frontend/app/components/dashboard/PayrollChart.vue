@@ -7,6 +7,7 @@ import {
   BarElement,
   CategoryScale,
   LinearScale,
+  BarController,
 } from "chart.js";
 import { Chart } from "vue-chartjs";
 
@@ -16,7 +17,8 @@ ChartJS.register(
   Legend,
   BarElement,
   CategoryScale,
-  LinearScale
+  LinearScale,
+  BarController
 );
 
 const { payrolls, fetchPayrolls } = usePayroll();
