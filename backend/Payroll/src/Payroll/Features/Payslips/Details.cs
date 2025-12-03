@@ -18,7 +18,7 @@ public static class Details
             payslip.Period.Start,
             payslip.Period.End,
             payslip.NetPay.Amount,
-            payslip.TotalBonuses.Amount,
+            payslip.TotalEarnings.Amount,
             payslip.TotalDeductions.Amount,
             [
                 .. payslip

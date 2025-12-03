@@ -25,21 +25,21 @@ public static class DbInitializer
         var baseSalary = PayrollPolicy.Create(
             "Base Salary",
             "Fixed base salary",
-            CompensationType.Bonus,
+            CompensationType.Earning,
             CalculationType.FixedAmount,
             0m
         );
         var perfBonus = PayrollPolicy.Create(
             "Performance Bonus",
             "Performance (10%)",
-            CompensationType.Bonus,
+            CompensationType.Earning,
             CalculationType.PercentageOfBase,
             10m
         );
         var overtime = PayrollPolicy.Create(
             "Overtime",
             "Overtime fixed",
-            CompensationType.Bonus,
+            CompensationType.Earning,
             CalculationType.FixedAmount,
             150m
         );

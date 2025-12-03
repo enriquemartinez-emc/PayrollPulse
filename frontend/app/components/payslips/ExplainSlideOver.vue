@@ -25,18 +25,16 @@ function onSubmit() {
     </UButton>
 
     <template #body>
-      <UChatPalette>
+      <UChatPalette class="h-full">
         <UChatMessages
           :messages="messages"
           :status="status"
-          :should-scroll-to-bottom="false"
           :user="{
             side: 'right',
             variant: 'solid',
           }"
           :assistant="{ icon: 'i-lucide-bot' }"
         />
-
         <template #prompt>
           <UChatPrompt v-model="request" variant="soft" @submit="onSubmit">
             <UChatPromptSubmit :status="status" />

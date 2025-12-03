@@ -16,8 +16,8 @@ public static class Errors
         public static DomainError NotFound(Guid id) =>
             DomainError.Create("Employee.NotFound", $"Employee with ID '{id}' was not found.");
 
-        public static DomainError InvalidBonus(string reason) =>
-            DomainError.Create("Employee.InvalidBonus", $"Bonus cannot be applied: {reason}");
+        public static DomainError InvalidEarning(string reason) =>
+            DomainError.Create("Employee.InvalidEarning", $"Earning cannot be applied: {reason}");
 
         public static DomainError InvalidDeduction(string reason) =>
             DomainError.Create(

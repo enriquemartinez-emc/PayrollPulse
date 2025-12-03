@@ -18,7 +18,7 @@ public static class List
                 r.Payslips.Count,
                 r.TotalGross.Amount,
                 r.TotalNet.Amount,
-                r.TotalBonuses.Amount,
+                r.TotalEarnings.Amount,
                 r.TotalDeductions.Amount,
                 r.CreatedAtUtc
             ));

@@ -5,7 +5,7 @@ public sealed record PayslipResponse(
     DateOnly Start,
     DateOnly End,
     decimal NetPay,
-    decimal TotalBonuses,
+    decimal TotalEarnings,
     decimal TotalDeductions,
     IReadOnlyList<PayslipItemResponse> Items
 );

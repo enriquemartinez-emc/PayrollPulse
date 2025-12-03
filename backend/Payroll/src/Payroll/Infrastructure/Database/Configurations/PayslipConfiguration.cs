@@ -37,15 +37,15 @@ public sealed class PayslipConfiguration : IEntityTypeConfiguration<Payslip>
         );
 
         builder.ComplexProperty(
-            p => p.TotalBonuses,
+            p => p.TotalEarnings,
             mb =>
             {
                 mb.Property(m => m.Amount)
-                    .HasColumnName("total_bonuses_amount")
+                    .HasColumnName("total_earnings_amount")
                     .HasPrecision(18, 2)
                     .IsRequired();
                 mb.Property(m => m.Currency)
-                    .HasColumnName("total_bonuses_currency")
+                    .HasColumnName("total_earnings_currency")
                     .HasMaxLength(3)
                     .IsRequired();
             }

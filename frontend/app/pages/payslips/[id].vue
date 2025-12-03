@@ -12,7 +12,7 @@ const { data } = await useFetch<Payslip>(`/payslips/${id}`, {
     start: "",
     end: "",
     netPay: 0,
-    totalBonuses: 0,
+    totalEarnings: 0,
     totalDeductions: 0,
     items: [],
   }),
@@ -31,7 +31,7 @@ const usd = new Intl.NumberFormat("en-US", {
 });
 
 const formattedTotals = computed(() => ({
-  totalBonuses: usd.format(data.value.totalBonuses ?? 0),
+  totalEarnings: usd.format(data.value.totalEarnings ?? 0),
   totalDeductions: usd.format(data.value.totalDeductions ?? 0),
   netPay: usd.format(data.value.netPay ?? 0),
 }));
@@ -39,7 +39,7 @@ const formattedTotals = computed(() => ({
 
 <template>
   <div class="py-5 flex justify-end">
-    <ExplainSlideOver :payslip-id="id" />
+    <PayslipsExplainSlideOver :payslip-id="id" />
   </div>
   <div class="py-2">
     <UCard class="p-4">
@@ -50,9 +50,9 @@ const formattedTotals = computed(() => ({
         </div>
 
         <div class="text-right">
-          <div>Total Bonuses</div>
+          <div>Total Earnings</div>
           <div>
-            {{ formattedTotals.totalBonuses }}
+            {{ formattedTotals.totalEarnings }}
           </div>
         </div>
 

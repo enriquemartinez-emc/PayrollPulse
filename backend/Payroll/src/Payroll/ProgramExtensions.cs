@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.SemanticKernel;
+using Payroll.Infrastructure.AI.Plugins;
 
 namespace Payroll;
 
@@ -117,6 +118,10 @@ public static class ProgramExtensions
             builder.AddOllamaChatCompletion(
                 modelId: config["AI:Model"] ?? "phi3:mini",
                 endpoint: new Uri(config["AI:Endpoint"] ?? "http://ollama:11434")
+            );
+
+            builder.Services.AddLogging(services =>
+                services.AddConsole().SetMinimumLevel(LogLevel.Trace)
             );
 
             // OpenAI (optional)

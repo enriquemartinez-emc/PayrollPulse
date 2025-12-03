@@ -8,7 +8,7 @@ public sealed class PayrollPolicy
     public Guid Id { get; private set; }
     public string Name { get; private set; } = string.Empty; // e.g. "Income Tax Policy"
     public string Description { get; private set; } = string.Empty; // human readable for AI/explanations
-    public CompensationType CompensationType { get; private set; } // Bonus or Deduction
+    public CompensationType CompensationType { get; private set; } // Earning or Deduction
     public CalculationType CalculationType { get; private set; } // PercentageOfBase | FixedAmount
     public decimal RateOrAmount { get; private set; } // percent or absolute
     public bool IsActive { get; private set; }

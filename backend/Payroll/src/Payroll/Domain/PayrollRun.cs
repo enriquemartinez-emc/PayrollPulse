@@ -16,7 +16,7 @@ public sealed class PayrollRun
 
     public Money TotalGross { get; private set; } = Money.Zero();
     public Money TotalNet { get; private set; } = Money.Zero();
-    public Money TotalBonuses { get; private set; } = Money.Zero();
+    public Money TotalEarnings { get; private set; } = Money.Zero();
     public Money TotalDeductions { get; private set; } = Money.Zero();
 
     private PayrollRun() { }
@@ -55,7 +55,7 @@ public sealed class PayrollRun
     public void RecalculateTotals()
     {
         TotalGross = Sum(p => p.BaseSalary);
-        TotalBonuses = Sum(p => p.TotalBonuses);
+        TotalEarnings = Sum(p => p.TotalEarnings);
         TotalDeductions = Sum(p => p.TotalDeductions);
         TotalNet = Sum(p => p.NetPay);
     }

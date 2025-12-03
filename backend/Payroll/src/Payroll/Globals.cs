@@ -10,5 +10,6 @@ global using Payroll.Features.Payroll;
 global using Payroll.Features.Payslips;
 global using Payroll.Features.Policies;
 global using Payroll.Infrastructure;
+global using Payroll.Infrastructure.AI;
 global using Payroll.Infrastructure.Auth;
 global using Payroll.Infrastructure.Database;

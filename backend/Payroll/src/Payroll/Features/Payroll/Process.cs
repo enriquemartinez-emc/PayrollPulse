@@ -62,7 +62,7 @@ public static class Process
             payrollRun.Payslips.Count,
             payrollRun.TotalGross.Amount,
             payrollRun.TotalNet.Amount,
-            payrollRun.TotalBonuses.Amount,
+            payrollRun.TotalEarnings.Amount,
             payrollRun.TotalDeductions.Amount,
             payrollRun.CreatedAtUtc
         );

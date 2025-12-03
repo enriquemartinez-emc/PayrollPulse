@@ -14,6 +14,7 @@ public class PayrollDbContext : DbContext
     public DbSet<PayslipItem> PayslipItems => Set<PayslipItem>();
     public DbSet<PayrollPolicy> PayrollPolicies => Set<PayrollPolicy>();
     public DbSet<User> Users => Set<User>();
+    public DbSet<ChatConversation> ChatConversations => Set<ChatConversation>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

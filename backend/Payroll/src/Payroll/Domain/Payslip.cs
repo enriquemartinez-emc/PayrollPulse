@@ -14,7 +14,7 @@ public sealed class Payslip
     public Money BaseSalary { get; }
     public IReadOnlyCollection<PayslipItem> Items => _items.AsReadOnly();
     public Money NetPay { get; private set; }
-    public Money TotalBonuses { get; private set; }
+    public Money TotalEarnings { get; private set; }
     public Money TotalDeductions { get; private set; }
 
     public Guid PayrollRunId { get; private set; }
@@ -36,7 +36,7 @@ public sealed class Payslip
         Period = period;
         BaseSalary = baseSalary;
         NetPay = Money.Zero(baseSalary.Currency); //baseSalary; TODO: Review for better approach
-        TotalBonuses = Money.Zero(baseSalary.Currency);
+        TotalEarnings = Money.Zero(baseSalary.Currency);
         TotalDeductions = Money.Zero(baseSalary.Currency);
     }
 
@@ -66,9 +66,9 @@ public sealed class Payslip
 
         _items.Add(item);
 
-        if (policy.CompensationType == CompensationType.Bonus)
+        if (policy.CompensationType == CompensationType.Earning)
         {
-            TotalBonuses = TotalBonuses.Add(amount);
+            TotalEarnings = TotalEarnings.Add(amount);
             NetPay = NetPay.Add(amount);
         }
         else

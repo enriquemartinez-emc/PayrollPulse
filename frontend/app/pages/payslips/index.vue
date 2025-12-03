@@ -61,10 +61,10 @@ const columns: TableColumn<Payslip>[] = [
     },
   },
   {
-    accessorKey: "totalBonuses",
-    header: () => h("div", { class: "text-right" }, "Total Bonuses"),
+    accessorKey: "totalEarnings",
+    header: () => h("div", { class: "text-right" }, "Total Earnings"),
     cell: ({ row }) => {
-      const amount = Number.parseFloat(row.getValue("totalBonuses"));
+      const amount = Number.parseFloat(row.getValue("totalEarnings"));
 
       const formatted = new Intl.NumberFormat("en-US", {
         style: "currency",

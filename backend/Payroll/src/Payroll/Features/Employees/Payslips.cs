@@ -21,7 +21,7 @@ public static class Payslips
                 p.Period.Start,
                 p.Period.End,
                 p.NetPay.Amount,
-                p.TotalBonuses.Amount,
+                p.TotalEarnings.Amount,
                 p.TotalDeductions.Amount,
                 Items: []
             ))

@@ -13,8 +13,8 @@ using Payroll.Infrastructure.Database;
 namespace Payroll.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(PayrollDbContext))]
-    [Migration("20251130172428_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20251202203219_AddChatConversation")]
+    partial class AddChatConversation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -468,6 +468,43 @@ namespace Payroll.Infrastructure.Database.Migrations
                         .HasDatabaseName("ix_payslip_items_policy_id");
 
                     b.ToTable("payslip_items", (string)null);
+                });
+
+            modelBuilder.Entity("Payroll.Infrastructure.AI.ChatConversation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("History")
+                        .IsRequired()
+                        .HasColumnType("jsonb")
+                        .HasColumnName("history");
+
+                    b.Property<Guid>("PayslipId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("payslip_id");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("Id")
+                        .HasName("pk_chat_conversations");
+
+                    b.HasIndex("UserId", "PayslipId")
+                        .HasDatabaseName("ix_chat_conversations_user_id_payslip_id");
+
+                    b.ToTable("chat_conversations", (string)null);
                 });
 
             modelBuilder.Entity("Payroll.Infrastructure.Auth.User", b =>

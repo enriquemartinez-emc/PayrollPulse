@@ -22,7 +22,7 @@ public sealed class PayrollRunConfiguration : IEntityTypeConfiguration<PayrollRu
 
         builder.ComplexProperty(pr => pr.TotalGross);
         builder.ComplexProperty(pr => pr.TotalNet);
-        builder.ComplexProperty(pr => pr.TotalBonuses);
+        builder.ComplexProperty(pr => pr.TotalEarnings);
         builder.ComplexProperty(pr => pr.TotalDeductions);
     }
 }

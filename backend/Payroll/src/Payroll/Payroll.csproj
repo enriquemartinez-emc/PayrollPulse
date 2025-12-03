@@ -24,12 +24,4 @@
   <ItemGroup>
     <None Include="C:\dev\projects\payroll\backend\Payroll\src\Payroll\.editorconfig" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Infrastructure\AI\Prompts\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Infrastructure/AI/Prompts\**\*">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
 </Project>

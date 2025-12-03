@@ -7,7 +7,7 @@ public sealed record PayrollResponse(
     int TotalEmployeesProcessed,
     decimal TotalGross,
     decimal TotalNet,
-    decimal TotalBonuses,
+    decimal TotalEarnings,
     decimal TotalDeductions,
     DateTime CreatedAtUtc
 );

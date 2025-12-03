@@ -219,16 +219,16 @@ namespace Payroll.Infrastructure.Database.Migrations
                                 .HasColumnName("period_start");
                         });
 
-                    b.ComplexProperty<Dictionary<string, object>>("TotalBonuses", "Payroll.Domain.PayrollRun.TotalBonuses#Money", b1 =>
+                    b.ComplexProperty<Dictionary<string, object>>("TotalEarnings", "Payroll.Domain.PayrollRun.TotalEarnings#Money", b1 =>
                         {
                             b1.Property<decimal>("Amount")
                                 .HasColumnType("numeric")
-                                .HasColumnName("total_bonuses_amount");
+                                .HasColumnName("total_earnings_amount");
 
                             b1.Property<string>("Currency")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("total_bonuses_currency");
+                                .HasColumnName("total_earnings_currency");
                         });
 
                     b.ComplexProperty<Dictionary<string, object>>("TotalDeductions", "Payroll.Domain.PayrollRun.TotalDeductions#Money", b1 =>
@@ -372,18 +372,18 @@ namespace Payroll.Infrastructure.Database.Migrations
                                 .HasColumnName("period_start");
                         });
 
-                    b.ComplexProperty<Dictionary<string, object>>("TotalBonuses", "Payroll.Domain.Payslip.TotalBonuses#Money", b1 =>
+                    b.ComplexProperty<Dictionary<string, object>>("TotalEarnings", "Payroll.Domain.Payslip.TotalEarnings#Money", b1 =>
                         {
                             b1.Property<decimal>("Amount")
                                 .HasPrecision(18, 2)
                                 .HasColumnType("numeric(18,2)")
-                                .HasColumnName("total_bonuses_amount");
+                                .HasColumnName("total_earnings_amount");
 
                             b1.Property<string>("Currency")
                                 .IsRequired()
                                 .HasMaxLength(3)
                                 .HasColumnType("character varying(3)")
-                                .HasColumnName("total_bonuses_currency");
+                                .HasColumnName("total_earnings_currency");
                         });
 
                     b.ComplexProperty<Dictionary<string, object>>("TotalDeductions", "Payroll.Domain.Payslip.TotalDeductions#Money", b1 =>
@@ -465,6 +465,43 @@ namespace Payroll.Infrastructure.Database.Migrations
                         .HasDatabaseName("ix_payslip_items_policy_id");
 
                     b.ToTable("payslip_items", (string)null);
+                });
+
+            modelBuilder.Entity("Payroll.Infrastructure.AI.ChatConversation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("History")
+                        .IsRequired()
+                        .HasColumnType("jsonb")
+                        .HasColumnName("history");
+
+                    b.Property<Guid>("PayslipId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("payslip_id");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("Id")
+                        .HasName("pk_chat_conversations");
+
+                    b.HasIndex("UserId", "PayslipId")
+                        .HasDatabaseName("ix_chat_conversations_user_id_payslip_id");
+
+                    b.ToTable("chat_conversations", (string)null);
                 });
 
             modelBuilder.Entity("Payroll.Infrastructure.Auth.User", b =>

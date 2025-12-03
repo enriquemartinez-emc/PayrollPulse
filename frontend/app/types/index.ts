@@ -35,7 +35,7 @@ export type Payroll = {
   totalEmployeesProcessed: number;
   totalGross: number;
   totalNet: number;
-  totalBonuses: number;
+  totalEarnings: number;
   totalDeductions: number;
   createdAtUtc: string; // DateTime as ISO datetime string (e.g., "2025-11-11T10:20:00Z")
 };
@@ -62,7 +62,7 @@ export type Payslip = {
   start: string;
   end: string;
   netPay: number;
-  totalBonuses: number;
+  totalEarnings: number;
   totalDeductions: number;
   items: PayslipItem[];
 };

@@ -2,6 +2,6 @@
 
 public enum CompensationType
 {
-    Bonus,
+    Earning,
     Deduction,
 }
