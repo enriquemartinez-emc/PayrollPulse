@@ -2,5 +2,8 @@
   <Folder Name="/src/">
     <Project Path="src/Payroll/Payroll.csproj" />
   </Folder>
-  <Folder Name="/tests/" />
+  <Folder Name="/tests/">
+    <Project Path="tests/IntegrationTests/IntegrationTests.csproj" Id="e1334215-5b3b-478f-989f-091af8ed2eb7" />
+    <Project Path="tests/UnitTests/UnitTests.csproj" Id="2a039d0e-e4b6-44ee-97a4-5ba72cbac483" />
+  </Folder>
 </Solution>
